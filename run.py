@@ -32,10 +32,10 @@ def main():
                 price = ""
 
             large_image = ""
-            try:
-                large_image = "http://merrjep.com/" + single_link_parsed.find('img', id="ctl00_ContentPlaceHolder1_TabContainer1_TabPanel1_LargeImage")['src']
-            except:
-                large_image = ""
+
+            image_results_table = single_link_parsed.select(".thumb_image")
+
+            #print image_results_table
 
             result = {
                 "contact_name": contact_name,
@@ -43,8 +43,10 @@ def main():
                 "titulli": tittle,
                 "description": description,
                 "qmimi": price,
-                "imazhi": large_image
+                "imazhi": []
             }
+            for image_url in image_results_table:
+                result['imazhi'].append(image_url['src'])
             print result
 
             print "________________________________________________"
